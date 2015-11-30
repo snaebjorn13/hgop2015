@@ -11,5 +11,7 @@ npm er tól til að halda utan um javascript pakka fyrir nodejs keyrsluumhverfi�
 nodejs er "open source cross platform" keyrsluumhverfi fyrir bakenda vefforrit. Það notar Javascript V8 vélina til að keyra kóða.
 ## Bower
 Bower er tól til þess að halda utan um javascript pakka fyrir framenda á vefsíðum. Það heldur utan um þessi "dependencies" í bower.json skrá sem geymd er í rót verkefnisins.
-## Topology of Deployment
-Ravison travis.
+## Topology of Deployment as of day 3
+GitHub heldur utan um source kóðann fyrir forritið okkar og DockerHub heldur utan um keyrslu gám fyrir forritið. Breytingar eru gerðar að vild á development vagrant vélinni og þegar gert er commit á GitHub repository-ið okkar þá fer Jenkins commit stage ferli í gang.
+
+Jenkins pollar GitHub repository-ið á mínútu fresti eftir breytingum, þegar hann nemur breytingar þá sækir hann breytingarnar, keyrir Grunt build script og býr til Docker image. Svo er push-að Docker image-inu á DockerHub og test vélin er látin slökkva á Docker gámnum hjá sér, sækja nýjasta image-ið og keyra Docker gáminn upp á nýtt með nýja image-inu.
