@@ -8,5 +8,8 @@ Grunt er "task runner" sem notaður er til þess að sjálfvirknivæða "build"-
 ## npm
 npm er tól til að halda utan um javascript pakka fyrir nodejs keyrsluumhverfið. npm sækir þá pakka sem tilgreindir eru í packages.json í rót hvers verkefnis og setur þá í node_modules möppu í rótinni. npm sækir pakka á npm "registry"-ið.
 ## nodejs
-
-## bower
+nodejs er "open source cross platform" keyrsluumhverfi fyrir bakenda vefforrit. Það notar Javascript V8 vélina til að keyra kóða.
+## Bower
+Bower er tól til þess að halda utan um javascript pakka fyrir framenda á vefsíðum. Það heldur utan um þessi "dependencies" í bower.json skrá sem geymd er í rót verkefnisins.
+## Topology of Deployment
+Ravison travis.
