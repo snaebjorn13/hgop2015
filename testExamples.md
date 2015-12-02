@@ -1,9 +1,33 @@
 # Events
 ## Game Management
-* GameCreated
-	- Done by user
-* GameJoined
-	- When a user has created a game, another user can join that game, given that noone else has joined that game.
+* GameCreated(UserX)
+	- UserX creates a game that is available for another user to join
+* GameJoined(UserX, UserY)
+	- UserY joins a game created by UserX, game can be full or non-existing.
+
+-
+
+Given [ GameCreated(User1) ]
+
+When [ GameJoin(User1,User2) ]
+
+Then [ GameJoined ]
+
+-
+
+Given [ GameCreated(User1) ]
+
+When [ GameJoin(User2,User3) ]
+
+Then [ GameDoesNotExist ]
+
+-
+
+Given [ GameCreated(User1), GameJoined(User1,User3) ]
+
+When [ GameJoin(User1, User2) ]
+
+Then [ GameFull ]
 
 ## Game Winning scenarios
 Given [ Placed(0,0,X), Placed(1,0,O), Placed(0,1,X), Placed(1,1,O) ]
