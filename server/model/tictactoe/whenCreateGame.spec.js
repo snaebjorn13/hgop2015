@@ -1,12 +1,14 @@
 function tictactoeCommandHandler (events) {
 	return {
-		executeCommand: function () {
-			return {
-				id:        '1234',
-				event:     'GameCreated',
-				userName:  'snaebjorn',
-				timeStamp: '2015.12.02T17:01:00'
-			};
+		executeCommand: function (cmd) {
+			if (cmd.comm === 'CreateGame') {
+				return [{
+					id:        '1234',
+					event:     'GameCreated',
+					userName:  'snaebjorn',
+					timeStamp: '2015.12.02T17:01:00'
+				}];
+			}
 		}
 	};
 }
@@ -23,12 +25,12 @@ describe('create game command', function () {
 			name:      'TheFirstGame',
 			timeStamp: '2015.12.02T17:01:00'
 		};
-		then = {
+		then = [{
 			id:        '1234',
 			event:     'GameCreated',
 			userName:  'snaebjorn',
 			timeStamp: '2015.12.02T17:01:00'
-		};
+		}];
 
 		var actualEvents = tictactoeCommandHandler(given)
 							.executeCommand(when);
