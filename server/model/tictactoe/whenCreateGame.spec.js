@@ -21,9 +21,33 @@ describe('create game command', () => {
 		}];
 
 		const actualEvents = ticTacToeCommandHandler(given)
-							.executeCommand(when);
+								.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be
 			.exactly(JSON.stringify(then));
 	});
+
+	it ('should create game with different user and time', () => {
+		given = [];
+		when = {
+			id:        '1122',
+			comm:      'CreateGame',
+			userName:  'pewdiepie',
+			gameId:    '85',
+			timeStamp: '2015.12.03T09:27:45'
+		};
+		then = [{
+			id:        '1122',
+			event:     'GameCreated',
+			userName:  'pewdiepie',
+			gameId:    '85',
+			timeStamp: '2015.12.03T09:27:45'
+		}];
+
+		const actualEvents = ticTacToeCommandHandler(given)
+								.executeCommand(when);
+
+		JSON.stringify(actualEvents).should.be
+			.exactly(JSON.stringify(then));
+	})
 });
