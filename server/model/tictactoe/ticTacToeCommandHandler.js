@@ -28,7 +28,11 @@ function tictactoeCommandHandler (events) {
 
 	return {
 		executeCommand: function (cmd) {
-			return handlers[cmd.comm](cmd);
+			var handler = handlers[cmd.comm];
+			if (!handler) {
+				throw new Error('No handler exists for command ' + cmd.comm);
+			}
+			return handler(cmd);
 		}
 	};
 }
