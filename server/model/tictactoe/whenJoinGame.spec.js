@@ -1,6 +1,6 @@
 const ticTacToeCommandHandler = require('./ticTacToeCommandHandler');
 
-describe('join game command', function () {
+describe('join game command', () => {
 	var given, when, then;
 
 	it ('should join game', () => {

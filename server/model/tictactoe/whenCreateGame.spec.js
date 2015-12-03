@@ -1,9 +1,9 @@
 const ticTacToeCommandHandler = require('./ticTacToeCommandHandler');
 
-describe('create game command', function () {
+describe('create game command', () => {
 	var given, when, then;
 
-	it ('should create game', function () {
+	it ('should create game', () => {
 		given = [];
 		when = {
 			id:        '1234',
