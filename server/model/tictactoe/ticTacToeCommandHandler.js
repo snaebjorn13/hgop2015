@@ -1,16 +1,27 @@
 var tictactoeCommandHandler =
 function tictactoeCommandHandler (events) {
-
 	return {
 		executeCommand: function (cmd) {
 			if (cmd.comm === 'CreateGame') {
-				return {
-					id:        '1234',
+				return [{
+					id:        cmd.id,
 					event:     'GameCreated',
-					userName:  'snaebjorn',
-					timeStamp: '2015.12.02T17:01:00'
-				};
+					userName:  cmd.userName,
+					gameId:    cmd.gameId,
+					timeStamp: cmd.timeStamp
+				}];
+			}
+			if (cmd.comm === 'JoinGame') {
+				return [{
+					id:            cmd.id,
+					event:         'GameJoined',
+					userName:      cmd.userName,
+					otherUserName: cmd.otherUserName,
+					timeStamp:     cmd.timeStamp
+				}];
 			}
 		}
 	};
 }
+
+module.exports = tictactoeCommandHandler;

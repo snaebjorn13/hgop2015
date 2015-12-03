@@ -1,27 +1,4 @@
-function tictactoeCommandHandler (events) {
-	return {
-		executeCommand: function (cmd) {
-			if (cmd.comm === 'CreateGame') {
-				return [{
-					id:        cmd.id,
-					event:     'GameCreated',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					timeStamp: cmd.timeStamp
-				}];
-			}
-			if (cmd.comm === 'JoinGame') {
-				return [{
-					id:            cmd.id,
-					event:         'GameJoined',
-					userName:      cmd.userName,
-					otherUserName: cmd.otherUserName,
-					timeStamp:     cmd.timeStamp
-				}];
-			}
-		}
-	};
-}
+const ticTacToeCommandHandler = require('./ticTacToeCommandHandler');
 
 describe('create game command', function () {
 	var given, when, then;
@@ -43,7 +20,7 @@ describe('create game command', function () {
 			timeStamp: '2015.12.02T17:01:00'
 		}];
 
-		var actualEvents = tictactoeCommandHandler(given)
+		var actualEvents = ticTacToeCommandHandler(given)
 							.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be
@@ -77,7 +54,7 @@ describe('join game command', function () {
 			timeStamp:     '2015.12.03T15:34:10'
 		}];
 
-		var actualEvents = tictactoeCommandHandler(given)
+		var actualEvents = ticTacToeCommandHandler(given)
 							.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be
