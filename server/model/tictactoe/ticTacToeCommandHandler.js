@@ -17,6 +17,7 @@ function tictactoeCommandHandler (events) {
 					event:         'GameJoined',
 					userName:      cmd.userName,
 					otherUserName: cmd.otherUserName,
+					gameId:        cmd.gameId,
 					timeStamp:     cmd.timeStamp
 				}];
 			}

@@ -8,6 +8,7 @@ describe('join game command', function () {
 			id:        '1110',
 			comm:      'GameCreated',
 			userName:  'gunnar',
+			gameId:    '34',
 			name:      'AnotherGame',
 			timeStamp: '2015.12.03T15:32:29'
 		}];
@@ -16,6 +17,7 @@ describe('join game command', function () {
 			comm:          'JoinGame',
 			userName:      'daniel',
 			otherUserName: 'gunnar',
+			gameId:        '34',
 			timeStamp:     '2015.12.03T15:34:10'
 		};
 		then = [{
@@ -23,6 +25,7 @@ describe('join game command', function () {
 			event:         'GameJoined',
 			userName:      'daniel',
 			otherUserName: 'gunnar',
+			gameId:        '34',
 			timeStamp:     '2015.12.03T15:34:10'
 		}];
 
