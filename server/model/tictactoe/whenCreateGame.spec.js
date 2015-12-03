@@ -3,10 +3,11 @@ function tictactoeCommandHandler (events) {
 		executeCommand: function (cmd) {
 			if (cmd.comm === 'CreateGame') {
 				return [{
-					id:        '1234',
+					id:        cmd.id,
 					event:     'GameCreated',
-					userName:  'snaebjorn',
-					timeStamp: '2015.12.02T17:01:00'
+					userName:  cmd.userName,
+					gameName:  cmd.gameName,
+					timeStamp: cmd.timeStamp
 				}];
 			}
 		}
@@ -22,13 +23,14 @@ describe('create game command', function () {
 			id:        '1234',
 			comm:      'CreateGame',
 			userName:  'snaebjorn',
-			name:      'TheFirstGame',
+			gameName:  'TheFirstGame',
 			timeStamp: '2015.12.02T17:01:00'
 		};
 		then = [{
 			id:        '1234',
 			event:     'GameCreated',
 			userName:  'snaebjorn',
+			gameName:  'TheFirstGame',
 			timeStamp: '2015.12.02T17:01:00'
 		}];
 
@@ -37,5 +39,24 @@ describe('create game command', function () {
 
 		JSON.stringify(actualEvents).should.be
 			.exactly(JSON.stringify(then));
+	});
+});
+
+describe('join game command', function () {
+	var given, when, then;
+
+	it ('should join game', () => {
+		given = [{
+			id:        '1110',
+			comm:      'GameCreated',
+			userName:  'gunnar',
+			name:      'AnotherGame',
+			timeStamp: '2015.12.03T15:32:29'
+		}];
+		when = {
+			id:        '1111',
+			comm:      'JoinGame',
+			userName:  ''
+		}
 	});
 });
