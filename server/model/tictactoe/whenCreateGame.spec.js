@@ -6,8 +6,17 @@ function tictactoeCommandHandler (events) {
 					id:        cmd.id,
 					event:     'GameCreated',
 					userName:  cmd.userName,
-					gameName:  cmd.gameName,
+					gameId:    cmd.gameId,
 					timeStamp: cmd.timeStamp
+				}];
+			}
+			if (cmd.comm === 'JoinGame') {
+				return [{
+					id:            cmd.id,
+					event:         'GameJoined',
+					userName:      cmd.userName,
+					otherUserName: cmd.otherUserName,
+					timeStamp:     cmd.timeStamp
 				}];
 			}
 		}
@@ -23,14 +32,14 @@ describe('create game command', function () {
 			id:        '1234',
 			comm:      'CreateGame',
 			userName:  'snaebjorn',
-			gameName:  'TheFirstGame',
+			gameId:    '29',
 			timeStamp: '2015.12.02T17:01:00'
 		};
 		then = [{
 			id:        '1234',
 			event:     'GameCreated',
 			userName:  'snaebjorn',
-			gameName:  'TheFirstGame',
+			gameId:    '29',
 			timeStamp: '2015.12.02T17:01:00'
 		}];
 
@@ -54,9 +63,24 @@ describe('join game command', function () {
 			timeStamp: '2015.12.03T15:32:29'
 		}];
 		when = {
-			id:        '1111',
-			comm:      'JoinGame',
-			userName:  ''
-		}
+			id:            '1111',
+			comm:          'JoinGame',
+			userName:      'daniel',
+			otherUserName: 'gunnar',
+			timeStamp:     '2015.12.03T15:34:10'
+		};
+		then = [{
+			id:            '1111',
+			event:         'GameJoined',
+			userName:      'daniel',
+			otherUserName: 'gunnar',
+			timeStamp:     '2015.12.03T15:34:10'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given)
+							.executeCommand(when);
+
+		JSON.stringify(actualEvents).should.be
+			.exactly(JSON.stringify(then));
 	});
 });
