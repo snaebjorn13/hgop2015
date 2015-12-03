@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 var tictactoeCommandHandler = (events) => {
-	var handlers = {
+	const handlers = {
 		'CreateGame': (cmd) => {
 			{
 				return [{
@@ -27,7 +27,7 @@ var tictactoeCommandHandler = (events) => {
 
 	return {
 		executeCommand: (cmd) => {
-			var handler = handlers[cmd.comm];
+			const handler = handlers[cmd.comm];
 			if (!handler) {
 				throw new Error('No handler exists for command ' + cmd.comm);
 			}

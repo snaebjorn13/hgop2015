@@ -29,7 +29,7 @@ describe('join game command', () => {
 			timeStamp:     '2015.12.03T15:34:10'
 		}];
 
-		var actualEvents = ticTacToeCommandHandler(given)
+		const actualEvents = ticTacToeCommandHandler(given)
 							.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be
