@@ -30,9 +30,31 @@ describe('join game command', () => {
 		}];
 
 		const actualEvents = ticTacToeCommandHandler(given)
-							.executeCommand(when);
+								.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be
 			.exactly(JSON.stringify(then));
+	});
+
+	it ('should not be able to join non-existing game', () => {
+		given = [];
+		when = {
+			id:            '1100',
+			comm:          'JoinGame',
+			userName:      'gudjon',
+			gameId:        '97',
+			timeStamp:     '2015.12.03T11:34:10'
+		};
+		then = [{
+			id:    '1100',
+			event: 'GameDoesNotExist',
+			userName: 'gudjon',
+			timeStamp: '2015.12.03T11:34:10'
+		}];
+
+		const actualEvents = ticTacToeCommandHandler(given)
+								.executeCommand(when);
+
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 });

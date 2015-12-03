@@ -1,6 +1,11 @@
 var _ = require('lodash');
 
-var tictactoeCommandHandler = (events) => {
+const tictactoeCommandHandler = (events) => {
+	const gameState = {
+		gameCreatedEvent: events[0],
+		board:            [['','',''],['','',''],['','','']]
+	};
+
 	const handlers = {
 		'CreateGame': (cmd) => {
 			{
@@ -14,6 +19,15 @@ var tictactoeCommandHandler = (events) => {
 			}
 		},
 		'JoinGame': (cmd) => {
+			if (gameState.gameCreatedEvent === undefined) {
+				return [{
+					id: cmd.id,
+					event: 'GameDoesNotExist',
+					userName: cmd.userName,
+					timeStamp: cmd.timeStamp
+				}];
+			}
+
 			return [{
 				id:            cmd.id,
 				event:         'GameJoined',
