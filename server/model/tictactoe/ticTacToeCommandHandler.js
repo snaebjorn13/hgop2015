@@ -1,8 +1,10 @@
+var _ = require('lodash');
+
 var tictactoeCommandHandler =
 function tictactoeCommandHandler (events) {
-	return {
-		executeCommand: function (cmd) {
-			if (cmd.comm === 'CreateGame') {
+	var handlers = {
+		'CreateGame': (cmd) => {
+			{
 				return [{
 					id:        cmd.id,
 					event:     'GameCreated',
@@ -11,16 +13,22 @@ function tictactoeCommandHandler (events) {
 					timeStamp: cmd.timeStamp
 				}];
 			}
-			if (cmd.comm === 'JoinGame') {
-				return [{
-					id:            cmd.id,
-					event:         'GameJoined',
-					userName:      cmd.userName,
-					otherUserName: cmd.otherUserName,
-					gameId:        cmd.gameId,
-					timeStamp:     cmd.timeStamp
-				}];
-			}
+		},
+		'JoinGame': (cmd) => {
+			return [{
+				id:            cmd.id,
+				event:         'GameJoined',
+				userName:      cmd.userName,
+				otherUserName: cmd.otherUserName,
+				gameId:        cmd.gameId,
+				timeStamp:     cmd.timeStamp
+			}];
+		}
+	}
+
+	return {
+		executeCommand: function (cmd) {
+			return handlers[cmd.comm](cmd);
 		}
 	};
 }
