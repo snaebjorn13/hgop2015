@@ -63,14 +63,9 @@ const tictactoeCommandHandler = (events) => {
 			}];
 		},
 		'MakeMove': (cmd) => {
-			var _event = 'MoveMade';
-			if (gameState.board[cmd.x][cmd.y] !== '') {
-				_event = 'TileOccupied';
-			}
-
-			return [{
+			var events = [{
 				id:        cmd.id,
-				event:     _event,
+				event:     'MoveMade',
 				userName:  cmd.userName,
 				gameId:    gameState.gameCreatedEvent.gameId,
 				x:         cmd.x,
@@ -78,6 +73,27 @@ const tictactoeCommandHandler = (events) => {
 				side:      cmd.side,
 				timeStamp: cmd.timeStamp
 			}];
+
+			if (gameState.board[cmd.x][cmd.y] !== '') {
+				events[0].event = 'TileOccupied';
+				return events;
+			}
+
+			gameState.board[cmd.x][cmd.y] = cmd.side;
+
+			if (gameState.board[cmd.x][0] === gameState.board[cmd.x][1] &&
+				gameState.board[cmd.x][1] === gameState.board[cmd.x][2]) {
+					events.push({
+						id:        cmd.id,
+						event:     'GameWon',
+						userName:  cmd.userName,
+						gameId:    cmd.gameId,
+						side:      cmd.side,
+						timeStamp: cmd.timeStamp
+					});
+			}
+
+			return events;
 		}
 	}
 
