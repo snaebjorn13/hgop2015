@@ -14,7 +14,9 @@ const tictactoeCommandHandler = (events) => {
 
 	_.each(events, (event) => {
 		const eventHandler = eventHandlers[event.event];
-		eventHandler && eventHandler(event);
+		if (eventHandler) {
+			eventHandler(event)
+		}
 	});
 
 	const handlers = {

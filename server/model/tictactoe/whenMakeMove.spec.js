@@ -90,5 +90,5 @@ describe('when make move', () => {
 			JSON.stringify(actualEvents).should.be
 				.exactly(JSON.stringify(then));
 		});
-	})
+	});
 });
