@@ -36,6 +36,18 @@ const tictactoeCommandHandler = (events) => {
 				gameId:        cmd.gameId,
 				timeStamp:     cmd.timeStamp
 			}];
+		},
+		'MakeMove': (cmd) => {
+			return [{
+				id:        cmd.id,
+				event:     'MoveMade',
+				userName:  cmd.userName,
+				gameId:    gameState.gameCreatedEvent.gameId,
+				x:         cmd.x,
+				y:         cmd.y,
+				side:      cmd.side,
+				timeStamp: cmd.timeStamp
+			}];
 		}
 	}
 
