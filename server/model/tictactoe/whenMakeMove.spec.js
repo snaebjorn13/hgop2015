@@ -416,4 +416,8 @@ describe('when make move', () => {
 		});
 	});
 
+	describe ('drawing scenarios', () => {
+		// TODO: write tests for drawing scenarios
+	});
+
 });
