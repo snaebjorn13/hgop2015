@@ -38,7 +38,7 @@ Then [ X Won ]
 
 -
 
-Given [ Placed(1,0,X), Placed(0,0,O), Placed(0,2,X), Placed(1,0,O), Placed(1,1,X) ]
+Given [ Placed(0,1,X), Placed(0,0,O), Placed(0,2,X), Placed(1,0,O), Placed(1,1,X) ]
 
 When [ Place(2,0,O) ]
 

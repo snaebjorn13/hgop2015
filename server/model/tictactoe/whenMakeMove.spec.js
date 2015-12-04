@@ -169,4 +169,90 @@ describe('when make move', () => {
 		});
 	});
 
+	describe('horizontal winning scenarios', () => {
+		it ('O should win when placed in 0,0 - 1,0 - 2,0', () => {
+			given = given.concat([{
+				id:        '1337',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:50:02'
+			}, {
+				id:        '1338',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         0,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:50:08'
+			}, {
+				id:        '1339',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         2,
+				side:      'X',
+				timeStamp: '2015.11.29T19:50:12'
+			}, {
+				id:        '1340',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         1,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:50:15'
+			}, {
+				id:        '1341',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         1,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:50:17'
+			}]);
+
+			when = {
+				id:        '1342',
+				comm:      'MakeMove',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         2,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:50:21'
+			};
+
+			then = [{
+				id:        '1342',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         2,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:50:21'
+			}, {
+				id:        '1342',
+				event:     'GameWon',
+				userName:  'jobbi',
+				gameId:    '33',
+				side:      'O',
+				timeStamp: '2015.11.29T19:50:21'
+			}];
+
+			const actualEvents = ticTacToeCommandHandler(given)
+									.executeCommand(when);
+
+			JSON.stringify(actualEvents).should.be
+				.exactly(JSON.stringify(then));
+		});
+	});
+
 });
