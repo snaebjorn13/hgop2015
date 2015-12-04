@@ -49,21 +49,14 @@ const tictactoeCommandHandler = (events) => {
 			}];
 		},
 		'MakeMove': (cmd) => {
+			var _event = 'MoveMade';
 			if (gameState.board[cmd.x][cmd.y] !== '') {
-				return [{
-					id:        cmd.id,
-					event:     'TileOccupied',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					x:         cmd.x,
-					y:         cmd.y,
-					side:      cmd.side,
-					timeStamp: cmd.timeStamp
-				}];
+				_event = 'TileOccupied';
 			}
+
 			return [{
 				id:        cmd.id,
-				event:     'MoveMade',
+				event:     _event,
 				userName:  cmd.userName,
 				gameId:    gameState.gameCreatedEvent.gameId,
 				x:         cmd.x,

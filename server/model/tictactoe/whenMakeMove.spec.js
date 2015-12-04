@@ -21,7 +21,7 @@ describe('when make move', () => {
 	});
 
 	describe ('on fresh game', () => {
-		it ('should join game', () => {
+		it ('should make move', () => {
 			when = {
 				id:        '1212',
 				comm:      'MakeMove',
@@ -67,7 +67,6 @@ describe('when make move', () => {
 				id:        '1214',
 				comm:      'MakeMove',
 				userName:  'jobbi',
-				gameId:    '33',
 				x:         0,
 				y:         1,
 				side:      'X',
