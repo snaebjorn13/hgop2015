@@ -6,6 +6,17 @@ const tictactoeCommandHandler = (events) => {
 		board:            [['','',''],['','',''],['','','']]
 	};
 
+	const eventHandlers = {
+		'MoveMade': (event) => {
+			gameState.board[event.x][event.y] = event.side;
+		}
+	};
+
+	_.each(events, (event) => {
+		const eventHandler = eventHandlers[event.event];
+		eventHandler && eventHandler(event);
+	});
+
 	const handlers = {
 		'CreateGame': (cmd) => {
 			{
@@ -38,6 +49,18 @@ const tictactoeCommandHandler = (events) => {
 			}];
 		},
 		'MakeMove': (cmd) => {
+			if (gameState.board[cmd.x][cmd.y] !== '') {
+				return [{
+					id:        cmd.id,
+					event:     'TileOccupied',
+					userName:  cmd.userName,
+					gameId:    cmd.gameId,
+					x:         cmd.x,
+					y:         cmd.y,
+					side:      cmd.side,
+					timeStamp: cmd.timeStamp
+				}];
+			}
 			return [{
 				id:        cmd.id,
 				event:     'MoveMade',
