@@ -330,6 +330,90 @@ describe('when make move', () => {
 			JSON.stringify(actualEvents).should.be
 				.exactly(JSON.stringify(then));
 		});
+
+		it ('O should win when placed in 2,0 - 1,1 - 0,2', () => {
+			given = given.concat([{
+				id:        '1617',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         0,
+				side:      'X',
+				timeStamp: '2015.11.29T19:54:03'
+			}, {
+				id:        '1618',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         2,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:54:04'
+			}, {
+				id:        '1619',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:54:06'
+			}, {
+				id:        '1620',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         0,
+				y:         2,
+				side:      'O',
+				timeStamp: '2015.11.29T19:54:09'
+			}, {
+				id:        '1621',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         2,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:54:10'
+			}]);
+
+			when = {
+				id:        '1622',
+				comm:      'MakeMove',
+				userName:  'danni',
+				gameId:    '33',
+				x:         1,
+				y:         1,
+				side:      'O',
+				timeStamp: '2015.11.29T19:54:14'
+			};
+
+			then = [{
+				id:        '1622',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         1,
+				y:         1,
+				side:      'O',
+				timeStamp: '2015.11.29T19:54:14'
+			}, {
+				id:        '1622',
+				event:     'GameWon',
+				userName:  'danni',
+				gameId:    '33',
+				side:      'O',
+				timeStamp: '2015.11.29T19:54:14'
+			}];
+
+			const actualEvents = ticTacToeCommandHandler(given)
+									.executeCommand(when);
+
+			JSON.stringify(actualEvents).should.be
+				.exactly(JSON.stringify(then));
+		});
 	});
 
 });

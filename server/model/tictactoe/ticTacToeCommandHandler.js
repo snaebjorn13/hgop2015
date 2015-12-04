@@ -114,6 +114,17 @@ const tictactoeCommandHandler = (events) => {
 					side:      cmd.side,
 					timeStamp: cmd.timeStamp
 				});
+			} else if (gameState.board[0][2] === cmd.side &&
+			gameState.board[1][1] === cmd.side &&
+			gameState.board[2][0] === cmd.side) {
+				events.push({
+					id:        cmd.id,
+					event:     'GameWon',
+					userName:  cmd.userName,
+					gameId:    cmd.gameId,
+					side:      cmd.side,
+					timeStamp: cmd.timeStamp
+				});
 			}
 
 			return events;
