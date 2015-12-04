@@ -6,6 +6,44 @@ const tictactoeCommandHandler = (events) => {
 		board:            [['','',''],['','',''],['','','']]
 	};
 
+	const checkVertical = (cmd) => {
+		return gameState.board[cmd.x][0] === cmd.side &&
+			gameState.board[cmd.x][1] === cmd.side &&
+			gameState.board[cmd.x][2] === cmd.side;
+	};
+
+	const checkHorizontal = (cmd) => {
+		return gameState.board[0][cmd.y] === cmd.side &&
+			gameState.board[1][cmd.y] === cmd.side &&
+			gameState.board[2][cmd.y] === cmd.side;
+	};
+
+	const checkDiagonal = (cmd) => {
+		return (gameState.board[0][0] === cmd.side &&
+			gameState.board[1][1] === cmd.side &&
+			gameState.board[2][2] === cmd.side) ||
+			(gameState.board[0][2] === cmd.side &&
+			gameState.board[1][1] === cmd.side &&
+			gameState.board[2][0] === cmd.side);
+	};
+
+	const checkIfWinner = (cmd, _events) => {
+		if (checkVertical(cmd) ||
+		checkHorizontal(cmd) ||
+		checkDiagonal(cmd)) {
+			_events.push({
+				id:        cmd.id,
+				event:     'GameWon',
+				userName:  cmd.userName,
+				gameId:    cmd.gameId,
+				side:      cmd.side,
+				timeStamp: cmd.timeStamp
+			});
+		}
+
+		return _events;
+	};
+
 	const eventHandlers = {
 		'MoveMade': (event) => {
 			gameState.board[event.x][event.y] = event.side;
@@ -63,7 +101,7 @@ const tictactoeCommandHandler = (events) => {
 			}];
 		},
 		'MakeMove': (cmd) => {
-			var events = [{
+			var _events = [{
 				id:        cmd.id,
 				event:     'MoveMade',
 				userName:  cmd.userName,
@@ -75,59 +113,13 @@ const tictactoeCommandHandler = (events) => {
 			}];
 
 			if (gameState.board[cmd.x][cmd.y] !== '') {
-				events[0].event = 'TileOccupied';
-				return events;
+				_events[0].event = 'TileOccupied';
+				return _events;
 			}
 
 			gameState.board[cmd.x][cmd.y] = cmd.side;
 
-			if (gameState.board[cmd.x][0] === cmd.side &&
-			gameState.board[cmd.x][1] === cmd.side &&
-			gameState.board[cmd.x][2] === cmd.side) {
-				events.push({
-					id:        cmd.id,
-					event:     'GameWon',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					side:      cmd.side,
-					timeStamp: cmd.timeStamp
-				});
-			} else if (gameState.board[0][cmd.y] === cmd.side &&
-			gameState.board[1][cmd.y] === cmd.side &&
-			gameState.board[2][cmd.y] === cmd.side) {
-				events.push({
-					id:        cmd.id,
-					event:     'GameWon',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					side:      cmd.side,
-					timeStamp: cmd.timeStamp
-				});
-			} else if (gameState.board[0][0] === cmd.side &&
-			gameState.board[1][1] === cmd.side &&
-			gameState.board[2][2] === cmd.side) {
-				events.push({
-					id:        cmd.id,
-					event:     'GameWon',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					side:      cmd.side,
-					timeStamp: cmd.timeStamp
-				});
-			} else if (gameState.board[0][2] === cmd.side &&
-			gameState.board[1][1] === cmd.side &&
-			gameState.board[2][0] === cmd.side) {
-				events.push({
-					id:        cmd.id,
-					event:     'GameWon',
-					userName:  cmd.userName,
-					gameId:    cmd.gameId,
-					side:      cmd.side,
-					timeStamp: cmd.timeStamp
-				});
-			}
-
-			return events;
+			return checkIfWinner(cmd, _events);
 		}
 	}
 
