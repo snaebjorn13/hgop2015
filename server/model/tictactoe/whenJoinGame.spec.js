@@ -6,17 +6,15 @@ describe('join game command', () => {
 	it ('should join game', () => {
 		given = [{
 			id:        '1110',
-			comm:      'GameCreated',
+			event:     'GameCreated',
 			userName:  'gunnar',
 			gameId:    '34',
-			name:      'AnotherGame',
 			timeStamp: '2015.12.03T15:32:29'
 		}];
 		when = {
 			id:            '1111',
 			comm:          'JoinGame',
 			userName:      'daniel',
-			otherUserName: 'gunnar',
 			gameId:        '34',
 			timeStamp:     '2015.12.03T15:34:10'
 		};
@@ -46,9 +44,9 @@ describe('join game command', () => {
 			timeStamp:     '2015.12.03T11:34:10'
 		};
 		then = [{
-			id:    '1100',
-			event: 'GameDoesNotExist',
-			userName: 'gudjon',
+			id:        '1100',
+			event:     'GameDoesNotExist',
+			userName:  'gudjon',
 			timeStamp: '2015.12.03T11:34:10'
 		}];
 
@@ -56,5 +54,30 @@ describe('join game command', () => {
 								.executeCommand(when);
 
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+
+	// WIP
+	it ('should not be able to join a full game', () => {
+		given = [{
+			id:        '1001',
+			event:     'GameCreated',
+			userName:  'skeeter',
+			gameId:    '87',
+			timeStamp: '2015.12.04T08:40:12'
+		}, {
+			id:            '1002',
+			event:         'GameJoined',
+			userName:      'pooter',
+			otherUserName: 'skeeter',
+			gameId:        '87',
+			timeStamp:     '2015.12.04T08:41:00'
+		}];
+		when = {
+			id:        '1004',
+			comm:      'JoinGame',
+			userName:  'skadoodle',
+			gameId:    '87',
+			timeStamp: '2015.12.04T08:41:20'
+		}
 	});
 });

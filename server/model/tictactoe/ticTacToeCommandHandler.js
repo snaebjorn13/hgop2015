@@ -45,7 +45,7 @@ const tictactoeCommandHandler = (events) => {
 				id:            cmd.id,
 				event:         'GameJoined',
 				userName:      cmd.userName,
-				otherUserName: cmd.otherUserName,
+				otherUserName: gameState.gameCreatedEvent.userName,
 				gameId:        cmd.gameId,
 				timeStamp:     cmd.timeStamp
 			}];

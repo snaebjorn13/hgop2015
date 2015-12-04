@@ -14,7 +14,7 @@ describe('when make move', () => {
 			id:            '4322',
 			event:         'GameJoined',
 			userName:      'danni',
-			otherUserName: '',
+			otherUserName: 'jobbi',
 			gameId:        '33',
 			timeStamp:     '2015.11.29T19:49:22'
 		}];
@@ -91,4 +91,5 @@ describe('when make move', () => {
 				.exactly(JSON.stringify(then));
 		});
 	});
+
 });
