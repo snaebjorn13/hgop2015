@@ -9,6 +9,9 @@ const tictactoeCommandHandler = (events) => {
 	const eventHandlers = {
 		'MoveMade': (event) => {
 			gameState.board[event.x][event.y] = event.side;
+		},
+		'GameJoined': (event) => {
+			gameState.otherPlayer = event.userName;
 		}
 	};
 
@@ -34,9 +37,18 @@ const tictactoeCommandHandler = (events) => {
 		'JoinGame': (cmd) => {
 			if (gameState.gameCreatedEvent === undefined) {
 				return [{
-					id: cmd.id,
-					event: 'GameDoesNotExist',
-					userName: cmd.userName,
+					id:        cmd.id,
+					event:     'GameDoesNotExist',
+					userName:  cmd.userName,
+					timeStamp: cmd.timeStamp
+				}];
+			}
+			if (gameState.otherPlayer) {
+				return [{
+					id:        cmd.id,
+					event:     'GameFull',
+					userName:  cmd.userName,
+					gameId:    cmd.gameId,
 					timeStamp: cmd.timeStamp
 				}];
 			}

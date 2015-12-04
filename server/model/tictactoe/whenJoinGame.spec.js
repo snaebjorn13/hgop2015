@@ -53,10 +53,10 @@ describe('join game command', () => {
 		const actualEvents = ticTacToeCommandHandler(given)
 								.executeCommand(when);
 
-		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+		JSON.stringify(actualEvents).should.be
+			.exactly(JSON.stringify(then));
 	});
 
-	// WIP
 	it ('should not be able to join a full game', () => {
 		given = [{
 			id:        '1001',
@@ -78,6 +78,19 @@ describe('join game command', () => {
 			userName:  'skadoodle',
 			gameId:    '87',
 			timeStamp: '2015.12.04T08:41:20'
-		}
+		};
+		then = [{
+			id:        '1004',
+			event:     'GameFull',
+			userName:  'skadoodle',
+			gameId:    '87',
+			timeStamp: '2015.12.04T08:41:20'
+		}];
+
+		const actualEvents = ticTacToeCommandHandler(given)
+								.executeCommand(when);
+
+		JSON.stringify(actualEvents).should.be
+			.exactly(JSON.stringify(then));
 	});
 });
