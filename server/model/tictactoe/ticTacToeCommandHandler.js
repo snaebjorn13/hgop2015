@@ -3,7 +3,8 @@ var _ = require('lodash');
 const tictactoeCommandHandler = (events) => {
 	const gameState = {
 		gameCreatedEvent: events[0],
-		board:            [['','',''],['','',''],['','','']]
+		board:            [['','',''],['','',''],['','','']],
+		moves:            0
 	};
 
 	const checkVertical = (cmd) => {
@@ -28,12 +29,25 @@ const tictactoeCommandHandler = (events) => {
 	};
 
 	const checkIfWinner = (cmd, _events) => {
+		gameState.moves++;
+
+		console.log('moves: ' + gameState.moves);
+
 		if (checkVertical(cmd) ||
 		checkHorizontal(cmd) ||
 		checkDiagonal(cmd)) {
 			_events.push({
 				id:        cmd.id,
 				event:     'GameWon',
+				userName:  cmd.userName,
+				gameId:    cmd.gameId,
+				side:      cmd.side,
+				timeStamp: cmd.timeStamp
+			});
+		} else if (gameState.moves === 9) {
+			_events.push({
+				id:        cmd.id,
+				event:     'GameDrawn',
 				userName:  cmd.userName,
 				gameId:    cmd.gameId,
 				side:      cmd.side,
@@ -47,6 +61,7 @@ const tictactoeCommandHandler = (events) => {
 	const eventHandlers = {
 		'MoveMade': (event) => {
 			gameState.board[event.x][event.y] = event.side;
+			gameState.moves++;
 		},
 		'GameJoined': (event) => {
 			gameState.otherPlayer = event.userName;

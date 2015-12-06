@@ -418,6 +418,116 @@ describe('when make move', () => {
 
 	describe ('drawing scenarios', () => {
 		// TODO: write tests for drawing scenarios
+		it ('a full board without victory should be a draw', () => {
+			given = given.concat([{
+				id:        '917',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         0,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:02'
+			}, {
+				id:        '918',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         1,
+				y:         0,
+				side:      'O',
+				timeStamp: '2015.11.29T19:53:05'
+			}, {
+				id:        '919',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         0,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:06'
+			}, {
+				id:        '920',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         0,
+				y:         2,
+				side:      'O',
+				timeStamp: '2015.11.29T19:53:08'
+			}, {
+				id:        '921',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         2,
+				y:         0,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:11'
+			}, {
+				id:        '922',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         1,
+				y:         1,
+				side:      'O',
+				timeStamp: '2015.11.29T19:53:13'
+			}, {
+				id:        '923',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         2,
+				y:         1,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:17'
+			}, {
+				id:        '924',
+				event:     'MoveMade',
+				userName:  'jobbi',
+				gameId:    '33',
+				x:         2,
+				y:         2,
+				side:      'O',
+				timeStamp: '2015.11.29T19:53:19'
+			}]);
+
+			when = {
+				id:        '924',
+				comm:      'MakeMove',
+				userName:  'danni',
+				gameId:    '33',
+				x:         1,
+				y:         2,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:24'
+			};
+
+			then = [{
+				id:        '924',
+				event:     'MoveMade',
+				userName:  'danni',
+				gameId:    '33',
+				x:         1,
+				y:         2,
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:24'
+			}, {
+				id:        '924',
+				event:     'GameDrawn',
+				userName:  'danni',
+				gameId:    '33',
+				side:      'X',
+				timeStamp: '2015.11.29T19:53:24'
+			}];
+
+			const actualEvents = ticTacToeCommandHandler(given)
+									.executeCommand(when);
+
+			JSON.stringify(actualEvents).should.be
+				.exactly(JSON.stringify(then));
+		});
 	});
 
 });
