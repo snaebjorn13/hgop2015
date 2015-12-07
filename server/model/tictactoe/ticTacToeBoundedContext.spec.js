@@ -40,7 +40,7 @@ describe('tictactoe game context', function() {
 		};
 
 		var commandHandlers = tictactoe;
-		var boundedContext = require('./tictactoeBoundedContext')(eventStoreStub, commandHandlers);
+		var boundedContext = require('./ticTacToeBoundedContext')(eventStoreStub, commandHandlers);
 
 		var emptyCommand = {
 			gameId: "123"
@@ -87,7 +87,7 @@ describe('tictactoe game context', function() {
 		var commandHandlers =function(){
 				return mockTickTackToe;
 		};
-		var boundedContext = require('./tictactoeBoundedContext')(mockStore, commandHandlers);
+		var boundedContext = require('./ticTacToeBoundedContext')(mockStore, commandHandlers);
 
 		var emptyCommand = {
 			gameId: "123"
