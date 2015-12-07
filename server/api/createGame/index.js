@@ -10,7 +10,7 @@ module.exports = function(eventStore){
 	router.post('/', controller.executeCommand);
 
 	return {
-		router:router 
+		router:router
 	}
 
 }
