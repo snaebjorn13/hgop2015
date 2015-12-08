@@ -84,7 +84,6 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
 		given(user('snaebjorn').createsGame('932'))
 			.expect('GameCreated').withGameId('932').isOk(done);
-		// done();
 	 });
 
 });

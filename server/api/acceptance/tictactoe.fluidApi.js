@@ -2,14 +2,24 @@ const should = require('should');
 const request = require('supertest');
 const acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+var idCounter = 1111;
+
+const incrementIdCounter = () => {
+	idCounter++;
+};
+
 const user = (_userName) => {
 	const userApi = {
 		createsGame: (_gameId) => {
-			return {
+			const cmd = {
+				id:        idCounter,
 				gameId:    _gameId,
 				comm:      'CreateGame',
 				userName:  _userName,
+				timeStamp: new Date().toJSON().slice(0, 19)
 			};
+			incrementIdCounter();
+			return cmd;
 		}
 	};
 
