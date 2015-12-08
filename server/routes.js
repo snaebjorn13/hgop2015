@@ -7,14 +7,13 @@
 var errors = require('./components/errors');
 
 module.exports = function(app, config) {
-	const eventStore = require('.' + config.eventstore);
+	var eventStore = require('.' + config.eventstore)();
 
 	app.get('/api/testApi', (req, res) => {
 		res.json({'test': 'test'});
 	});
 
 	app.use('/api/gameHistory', require('./api/gameHistory')(eventStore).router);
-
 	app.use('/api/joinGame', require('./api/joinGame')(eventStore).router);
 	app.use('/api/placeMove', require('./api/placeMove')(eventStore).router);
 	app.use('/api/createGame', require('./api/createGame')(eventStore).router);
