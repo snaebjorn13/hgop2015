@@ -4,6 +4,33 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+// fluid API
+const given = (cmdName) => {
+	const cmd = {
+		name:        cmdName,
+		destination: undefined
+	};
+
+	const expectations = [];
+
+	const givenApi = {
+		sendTo: (dest) => {
+			cmd.destination = dest;
+			return givenApi;
+		},
+		expect: (eventName) => {
+			expectations.push(eventName);
+			return givenApi;
+		},
+		and: givenApi.expect,
+		when: (done) => {
+			// TODO: perform test logic
+			done();
+		}
+	};
+
+	return givenApi;
+};
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
