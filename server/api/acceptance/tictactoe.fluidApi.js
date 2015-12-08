@@ -18,8 +18,6 @@ const user = (_userName) => {
 
 // fluid API
 const given = (cmd) => {
-	var destination = undefined;
-
 	const expectations = [];
 
 	const givenApi = {
