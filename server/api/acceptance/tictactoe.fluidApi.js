@@ -2,24 +2,20 @@ const should = require('should');
 const request = require('supertest');
 const acceptanceUrl = process.env.ACCEPTANCE_URL;
 
-var idCounter = 1111;
-
-const incrementIdCounter = () => {
-	idCounter++;
-};
-
 const user = (_userName) => {
+	const commands = [];
+
 	const userApi = {
 		createsGame: (_gameId) => {
-			const cmd = {
-				id:        idCounter,
+			commands.push({
 				gameId:    _gameId,
 				comm:      'CreateGame',
-				userName:  _userName,
-				timeStamp: new Date().toJSON().slice(0, 19)
-			};
-			incrementIdCounter();
-			return cmd;
+				userName:  _userName
+			});
+			return userApi;
+		},
+		allCommands: () => {
+			return commands;
 		}
 	};
 
@@ -27,7 +23,7 @@ const user = (_userName) => {
 };
 
 // fluid API
-const given = (cmd) => {
+const given = (commands) => {
 	const expectations = [];
 
 	const givenApi = {
@@ -43,6 +39,7 @@ const given = (cmd) => {
 			return givenApi;
 		},
 		isOk: (done) => {
+			const cmd = commands[0];
 			const command = {
 				id:        '1111',
 				gameId:    cmd.gameId,

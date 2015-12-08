@@ -82,7 +82,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
 		 .expect("GameCreated").withName("TheFirstGame").isOk(done);
 			*/
 
-		given(user('snaebjorn').createsGame('932'))
+		given(user('snaebjorn').createsGame('932').allCommands())
 			.expect('GameCreated').withGameId('932').isOk(done);
 	 });
 
