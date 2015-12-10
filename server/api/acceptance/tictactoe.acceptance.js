@@ -76,7 +76,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
 	});
 
 
-	 it('Should execute fluid API test', function (done) {
+	 it ('Should execute fluid API test', function (done) {
 		 /*
 		 given(user("YourUser").createsGame("TheFirstGame"))
 		 .expect("GameCreated").withName("TheFirstGame").isOk(done);
@@ -84,6 +84,33 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
 		given(user('snaebjorn').createsGame('932').allCommands())
 			.expect('GameCreated').withGameId('932').isOk(done);
+	 });
+
+	 it ('should play a game to a draw correctly', (done) => {
+		 /* play this game:
+		 	X place 1,1
+			O place 2,1
+			X place 2,2
+			O place 0,0
+			X place 1,0
+			O place 1,2
+			X place 0,2
+			O place 2,0
+			X place 0,1
+		 */
+
+		 given(user('jayjay').createsGame('775').allCommands())
+			.and(user('traplord').joinsGame('775').allCommands())
+			.and(user('jayjay').makesMove(1, 1).inGame('775').asSide('X').allCommands())
+			.and(user('traplord').makesMove(2, 1).inGame('775').asSide('O').allCommands())
+			.and(user('jayjay').makesMove(2, 2).inGame('775').asSide('X').allCommands())
+			.and(user('traplord').makesMove(0, 0).inGame('775').asSide('O').allCommands())
+			.and(user('jayjay').makesMove(1, 0).inGame('775').asSide('X').allCommands())
+			.and(user('traplord').makesMove(1, 2).inGame('775').asSide('O').allCommands())
+			.and(user('jayjay').makesMove(0, 2).inGame('775').asSide('X').allCommands())
+			.and(user('traplord').makesMove(2, 0).inGame('775').asSide('O').allCommands())
+			.and(user('jayjay').makesMove(0, 1).inGame('775').asSide('X').allCommands())
+			.expect('GameDrawn').byUser('jayjay').isOk(done);
 	 });
 
 });
