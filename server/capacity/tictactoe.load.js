@@ -6,7 +6,7 @@ it('Should play 500 games in 9.5 seconds.', function (done) {
 	// seonds. Changed timeout to 9.5 seconds which is roughly 20% higher.
 	// Jenkins runs slower, so number of games was decreased to 500.
 	var doneCount = 0;
-	var gamesToPlay = 500;
+	var gamesToPlay = 600;
 	var x = 9.5;
 
 	this.timeout(x * 1000);
