@@ -1,7 +1,7 @@
 var user  = require('../acceptance/tictactoe.fluidApi').user;
 var given = require('../acceptance/tictactoe.fluidApi').given;
 
-it('Should play 500 games in 9.5 seconds.', function (done) {
+it('Should play 600 games in 9.5 seconds.', function (done) {
 	// Got stable results for 600 games in 8 seconds, longest execution was 7.89
 	// seonds. Changed timeout to 9.5 seconds which is roughly 20% higher.
 	// Jenkins runs slower, so number of games was decreased to 500.

@@ -15,3 +15,14 @@ Bower er tól til þess að halda utan um javascript pakka fyrir framenda á vef
 GitHub heldur utan um source kóðann fyrir forritið okkar og DockerHub heldur utan um keyrslu gám fyrir forritið. Breytingar eru gerðar að vild á development vagrant vélinni og þegar gert er commit á GitHub repository-ið okkar þá fer Jenkins commit stage ferli í gang.
 
 Jenkins pollar GitHub repository-ið á mínútu fresti eftir breytingum, þegar hann nemur breytingar þá sækir hann breytingarnar, keyrir Grunt build script og býr til Docker image. Svo er push-að Docker image-inu á DockerHub og test vélin er látin slökkva á Docker gámnum hjá sér, sækja nýjasta image-ið og keyra Docker gáminn upp á nýtt með nýja image-inu.
+
+## Load Tests
+#### Results
+Ég setti upphaflega það markmið að spila 600 leiki á 8 sekúndum eftir að hafa prófað mig áfram og fundið tölur sem gáfu mér stabílar niðurstöður. Svo hækkaði ég timeout-ið um 20% í 9.5 sekúndur.
+
+Þegar Jenkins keyrði álagsprófið spiluðust 600 leikir á 6.85 sekúndum, semsagt vel undir mörkunum 9.5 sekúndur.
+
+#### Parallel Execution
+Leikirnir í álagsprófinu keyra á sama tíma, for lykkjan í tictactoe.load.js keyrir án þess að bíða eftir að leikirnir hafa klárað að spilast. Það er vegna þess að Node.js notar asynchronous IO og block-ar ekki þráðinn (eina þráðinn sem er í notkun) á meðan beðið er eftir svari. QED fallið er keyrt í lok hvers leiks og það keyrir done fallið bara þegar allir leikir hafa klárað að spilast.
+
+Álagsprófið stenst ef allir leikir klárast innan þeirra tímamarka sem við setjum okkur.
