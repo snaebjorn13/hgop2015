@@ -3,6 +3,7 @@ const request       = require('supertest');
 const async         = require('async');
 const acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+// pseudo IDs
 var idCounter = 3214;
 
 const firstLetterLowercase = (str) => {
@@ -33,11 +34,7 @@ const assertExpectations = (resBody, expectations) => {
 	const lastEvent = resBody[resBody.length - 1];
 	const exp       = expectations[0];
 
-	for (var key in exp) {
-		if (exp.hasOwnProperty(key)) {
-			should(lastEvent[key]).eql(exp[key]);
-		}
-	}
+	should(lastEvent).match(exp);
 };
 
 const user = (_userName) => {
@@ -110,12 +107,10 @@ const given = (commands) => {
 			return givenApi;
 		},
 		isOk: (done) => {
-			var commandString = '';
 			// used to assert the value of otherUserName when a game is joined
 			const gameCreator = commands[0].userName;
 
 			async.eachSeries(commands, (_cmd, cb) => {
-				commandString += _cmd.comm + ', ';
 				var url = '/api/' + firstLetterLowercase(_cmd.comm);
 				const cmd = createCommand(_cmd);
 				request(acceptanceUrl).post(url)
@@ -129,7 +124,6 @@ const given = (commands) => {
 						cb();
 					});
 			}, () => {
-				console.log('finished!');
 				const gameId = commands[0].gameId;
 
 				// assert the outcome
