@@ -28,6 +28,14 @@ Leikirnir í álagsprófinu keyra á sama tíma, for lykkjan í tictactoe.load.j
 Álagsprófið stenst ef allir leikir klárast innan þeirra tímamarka sem við setjum okkur.
 
 ## Deploy Any Version
-Þetta gefur okkur möguleikann á því að deploy-a eldri útgáfum ef við skyldum vilja það. Við myndum vilja gera það, til dæmis, ef nýjasta útgáfa er komin í production og það uppgötvast að það er böggur sem prófanirnar náðu ekki að grípa. Þá getum við bara sett eldri útgáfu í production á meðan sú nýja er löguð.
+
+#### What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
+Þetta gefur okkur möguleikann á því að deploy-a eldri útgáfum ef við skyldum vilja það. Þetta er mjög góður kostur að hafa og gæti komið sér vel þegar það er release-að. Við myndum vilja gera það, til dæmis, ef nýjasta útgáfa er komin í production og það uppgötvast að það er böggur sem prófanirnar náðu ekki að grípa. Þá getum við bara sett eldri útgáfu í production á meðan sú nýja er löguð.
 
 Sá sem hefur aðgang að Jenkins build interface-inu getur stýrt því hvaða version er keyrandi í production.
+
+#### What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+Deployment skriptan keyrir á öðru stage-i heldur en það sem er trigger-að af git commit-inu. Þar sem git commit taggið er notað sem version á Docker image er betra að hafa það á sama stage-i og það sem er triggerað af commit-inu.
+
+#### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
+I dunno rly
