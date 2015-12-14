@@ -53,6 +53,8 @@ rc=$?; if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
+echo git commit is $GIT_COMMIT
+
 echo Pushing image..
 docker push snaebjorn13/tictactoe:$GIT_COMMIT
 rc=$?; if [[ $rc != 0 ]]; then
