@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo Updating to $2, running on port $1
+
 docker kill tictactoe$1
 docker rm tictactoe$1
 docker pull snaebjorn13/tictactoe:$GIT_PREVIOUS_SUCCESSFUL_COMMIT
