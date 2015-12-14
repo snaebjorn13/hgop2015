@@ -22,6 +22,11 @@ module.exports = function(app, config) {
 	app.route('/:url(api|auth|components|app|bower_components|assets)/*')
 	 .get(errors[404]);
 
+	 app.route('/version.html')
+	 	.get(function (req, res) {
+			res.sendfile(app.get('appPath') + '/version.html');
+		});
+
 	// All other routes should redirect to the index.html
 	app.route('/*')
 		.get(function(req, res) {
