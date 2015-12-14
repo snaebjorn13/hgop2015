@@ -26,3 +26,8 @@ Jenkins pollar GitHub repository-ið á mínútu fresti eftir breytingum, þegar
 Leikirnir í álagsprófinu keyra á sama tíma, for lykkjan í tictactoe.load.js keyrir án þess að bíða eftir að leikirnir hafa klárað að spilast. Það er vegna þess að Node.js notar asynchronous IO og block-ar ekki þráðinn (eina þráðinn sem er í notkun) á meðan beðið er eftir svari. QED fallið er keyrt í lok hvers leiks og það keyrir done fallið bara þegar allir leikir hafa klárað að spilast.
 
 Álagsprófið stenst ef allir leikir klárast innan þeirra tímamarka sem við setjum okkur.
+
+## Deploy Any Version
+Þetta gefur okkur möguleikann á því að deploy-a eldri útgáfum ef við skyldum vilja það. Við myndum vilja gera það, til dæmis, ef nýjasta útgáfa er komin í production og það uppgötvast að það er böggur sem prófanirnar náðu ekki að grípa. Þá getum við bara sett eldri útgáfu í production á meðan sú nýja er löguð.
+
+Sá sem hefur aðgang að Jenkins build interface-inu getur stýrt því hvaða version er keyrandi í production.
