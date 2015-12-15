@@ -11,7 +11,8 @@ angular.module('tictactoeApp')
           'id': id,
           'gameId': gameId,
           'comm': 'CreateGame',
-          'userName': user,
+          'userName': user.userName,
+		  'side':     user.side,
           'timeStamp': '2014-12-02T11:29:29'
         }
       );

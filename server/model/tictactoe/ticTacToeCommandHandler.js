@@ -88,6 +88,7 @@ const tictactoeCommandHandler = (events) => {
 					id:        cmd.id,
 					event:     'GameCreated',
 					userName:  cmd.userName,
+					side:      cmd.side,
 					gameId:    cmd.gameId,
 					timeStamp: cmd.timeStamp
 				}];
