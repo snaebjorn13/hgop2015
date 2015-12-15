@@ -48,8 +48,6 @@ angular.module('tictactoeApp')
         return;
       }
 
-	  console.log($scope.gameState.board);
-
       thenHandleEvents($http.post('/api/makeMove/', {
 		  id: guid(),
           gameId: $scope.gameState.gameId,

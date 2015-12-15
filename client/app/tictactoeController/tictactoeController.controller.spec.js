@@ -12,7 +12,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
 
 		$provide.value('guid', function () {
 			return guids.pop();
-		})
+		});
 	 });
   });
 
