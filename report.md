@@ -8,7 +8,7 @@ Grunt er "task runner" sem notaður er til þess að sjálfvirknivæða "build"-
 ## npm
 npm er tól til að halda utan um javascript pakka fyrir nodejs keyrsluumhverfið. npm sækir þá pakka sem tilgreindir eru í packages.json í rót hvers verkefnis og setur þá í node_modules möppu í rótinni. npm sækir pakka á npm "registry"-ið.
 ## nodejs
-nodejs er "open source cross platform" keyrsluumhverfi fyrir bakenda vefforrit. Það notar Javascript V8 vélina til að keyra kóða.
+Nodejs er "open source cross platform" keyrsluumhverfi fyrir bakenda vefforrit. Það notar Javascript V8 vélina til að keyra kóða. Það er notað í flestum tilfellum, og í okkar, til að keyra einhversskonar API bakenda.
 ## Bower
 Bower er tól til þess að halda utan um javascript pakka fyrir framenda á vefsíðum. Það heldur utan um þessi "dependencies" í bower.json skrá sem geymd er í rót verkefnisins.
 ## Topology of Deployment as of day 3
@@ -38,4 +38,4 @@ Sá sem hefur aðgang að Jenkins build interface-inu getur stýrt því hvaða 
 Deployment skriptan keyrir á öðru stage-i heldur en það sem er trigger-að af git commit-inu. Þar sem git commit taggið er notað sem version á Docker image er betra að hafa það á sama stage-i og það sem er triggerað af commit-inu.
 
 #### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
-I dunno rlyyy........
+Við hvert commit sem push-að er fer build pipeline-ið í gang. Commit hash-ið er notað til að skilgreina útgáfuna og er bætt við fyrir aftan nafnið á docker image-inu. Þetta commit hash er pikkað upp af commit stage-inu og er sent áfram í acceptance stage-ið og deployment stage-ið. Því veltur það hvaða version fer í production, á því hvaða version (commit hash) commit stage-ið byrjar með. Því getum við sett gamalt build í gang (með eldra commit hash en það nýjasta) og þar með sett þá útgáfu í production, ef build-ið klikkar ekki á einhverju stigi.
