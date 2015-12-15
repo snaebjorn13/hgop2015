@@ -47,9 +47,12 @@ angular.module('tictactoeApp')
       if(!$scope.myTurn()){
         return;
       }
-      thenHandleEvents($http.post('/api/placeMove/', {
+
+	  console.log($scope.me);
+
+      thenHandleEvents($http.post('/api/makeMove/', {
           gameId: $scope.gameState.gameId,
-          comm: 'PlaceMove',
+          comm: 'MakeMove',
           user: $scope.me,
           timeStamp: '2014-12-02T11:29:29',
           move: {

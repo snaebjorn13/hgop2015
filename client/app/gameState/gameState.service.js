@@ -2,6 +2,13 @@
 
 angular.module('tictactoeApp')
   .factory('gameState', function () {
+	var createUserObj = function (event) {
+		return {
+			userName: event.userName,
+			side:     event.side
+		};
+	};
+
     return function () {
 
       var gameState = {
@@ -16,19 +23,19 @@ angular.module('tictactoeApp')
               gameState.created = true;
               gameState.name = event.name;
               gameState.gameId = event.gameId;
-              gameState.creatingUser = event.user;
+              gameState.creatingUser = createUserObj(event);
             },
             'GameJoined': function (event, gameState) {
-              gameState.joiningUser = event.user;
+              gameState.joiningUser = createUserObj(event);
             },
             'MovePlaced': function (event, gameState) {
-              var x = event.move.xy.x, y = event.move.xy.y;
-              gameState.board[x][y] = event.move.side;
-              gameState.nextTurn = event.move.side === 'X' ? 'O' : 'X';
+              var x = event.x, y = event.y;
+              gameState.board[x][y] = event.side;
+              gameState.nextTurn = event.side === 'X' ? 'O' : 'X';
             },
             'GameWon': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
-              gameState.winner = event.user;
+              gameState.winner = createUserObj(event);
             },
             'GameDraw': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
