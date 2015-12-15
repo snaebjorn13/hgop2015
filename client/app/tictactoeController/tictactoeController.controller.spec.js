@@ -55,33 +55,26 @@ describe('Controller: TictactoeControllerCtrl', function () {
       event: 'GameCreated',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Creator'
-      }
+      userName: 'Creator'
     }, {
       event: 'GameJoined',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Joiner'
-      }
+      userName: 'Joiner'
     }]);
     httpBackend.flush();
   }
 
   it('should post side from current user X', function () {
     getHistory();
-    httpBackend.expectPOST('/api/placeMove/', {
+    httpBackend.expectPOST('/api/makeMove/', {
       gameId: '87687',
-      comm: 'PlaceMove',
-      user: {
-        userName: 'Gummi'
-      },
+      comm: 'MakeMove',
+      userName: 'Gummi',
       timeStamp: '2014-12-02T11:29:29',
-      move: {
-        xy:{x:2, y:0},
-        side: 'X'
-      }
+	  x: 2,
+	  y: 0,
+	  side: 'X'
     }).respond([
       {
         event: 'MovePlaced',
@@ -89,10 +82,9 @@ describe('Controller: TictactoeControllerCtrl', function () {
           userName: 'Gummi'
         },
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:0},
-          side: 'X'
-        }
+		x: 2,
+		y: 0,
+		side: 'X'
       }
     ]);
 
@@ -114,17 +106,14 @@ describe('Controller: TictactoeControllerCtrl', function () {
     location.search('gameSide', 'O');
 
     getHistory();
-    httpBackend.expectPOST('/api/placeMove/', {
+    httpBackend.expectPOST('/api/makeMove/', {
       gameId: '87687',
-      comm: 'PlaceMove',
-      user: {
-        userName: 'Gummi'
-      },
+      comm: 'MakeMove',
+      userName: 'Gummi',
       timeStamp: '2014-12-02T11:29:29',
-      move: {
-        xy:{x:2, y:1},
-        side: 'O'
-      }
+	  x: 2,
+	  y: 1,
+	  side: 'O'
     }).respond([
       {
         event: 'MovePlaced',
@@ -132,10 +121,9 @@ describe('Controller: TictactoeControllerCtrl', function () {
           userName: 'Gummi'
         },
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:1},
-          side: 'O'
-        }
+		x: 2,
+		y: 1,
+		side: 'O'
       }
     ]);
 
@@ -178,5 +166,3 @@ describe('Controller: TictactoeControllerCtrl', function () {
     httpBackend.flush();
   });
 });
-
-

@@ -15,9 +15,7 @@ describe('Factory: TictacToeState', function () {
   it('Should add other player to game state when gameJoined', function () {
     gameState.mutate([{
         event: 'GameJoined',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
@@ -30,9 +28,7 @@ describe('Factory: TictacToeState', function () {
     gameState.mutate([{
         event: 'GameCreated',
         gameId: '198299',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
@@ -47,15 +43,12 @@ describe('Factory: TictacToeState', function () {
 
     gameState.mutate([{
         event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:0, y:1},
-          side: 'X'
-        }
+		x: 0,
+		y: 1,
+		side: 'X'
       }]
     );
 
@@ -67,15 +60,12 @@ describe('Factory: TictacToeState', function () {
 
     gameState.mutate([{
         event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:2},
-          side: 'X'
-        }
+		x: 2,
+		y: 2,
+		side: 'X'
       }]
     );
 
@@ -87,15 +77,12 @@ describe('Factory: TictacToeState', function () {
     gameState.me = {side: 'O'};
     gameState.mutate([{
         event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:2},
-          side: 'X'
-        }
+		x: 2,
+		y: 2,
+		side: 'X'
       }]
     );
 
@@ -106,9 +93,7 @@ describe('Factory: TictacToeState', function () {
     gameState.me = {side: 'X'};
     gameState.mutate([{
         event: 'GameCreated',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
@@ -121,9 +106,7 @@ describe('Factory: TictacToeState', function () {
     gameState.me = {side: 'X'};
     gameState.mutate([{
         event: 'GameWon',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
@@ -137,9 +120,7 @@ describe('Factory: TictacToeState', function () {
     gameState.me = {side: 'X'};
     gameState.mutate([{
         event: 'GameDraw',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
@@ -149,5 +130,3 @@ describe('Factory: TictacToeState', function () {
     expect(gameState.gameDraw).toBe(true);
   });
 });
-
-
