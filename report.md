@@ -38,4 +38,4 @@ Sá sem hefur aðgang að Jenkins build interface-inu getur stýrt því hvaða 
 Deployment skriptan keyrir á öðru stage-i heldur en það sem er trigger-að af git commit-inu. Þar sem git commit taggið er notað sem version á Docker image er betra að hafa það á sama stage-i og það sem er triggerað af commit-inu.
 
 #### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
-I dunno rly
+I dunno rlyyy
