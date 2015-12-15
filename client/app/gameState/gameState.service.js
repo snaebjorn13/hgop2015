@@ -28,7 +28,7 @@ angular.module('tictactoeApp')
             'GameJoined': function (event, gameState) {
               gameState.joiningUser = createUserObj(event);
             },
-            'MovePlaced': function (event, gameState) {
+            'MoveMade': function (event, gameState) {
               var x = event.x, y = event.y;
               gameState.board[x][y] = event.side;
               gameState.nextTurn = event.side === 'X' ? 'O' : 'X';
@@ -37,7 +37,7 @@ angular.module('tictactoeApp')
               gameState.nextTurn = 'GameOver';
               gameState.winner = createUserObj(event);
             },
-            'GameDraw': function (event, gameState) {
+            'GameDrawn': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
               gameState.gameDraw = true;
             }

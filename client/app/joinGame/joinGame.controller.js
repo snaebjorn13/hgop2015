@@ -20,7 +20,8 @@ angular.module('tictactoeApp')
           'id': guid(),
           'gameId': $scope.gameState.gameId,
           'comm': 'JoinGame',
-          'user': user,
+          'userName': user.userName,
+		  'side': user.side,
           'timeStamp': '2014-12-02T11:29:29'
         }
       );

@@ -58,13 +58,7 @@ angular.module('tictactoeApp')
           timeStamp: '2014-12-02T11:29:29',
 		  x: coords.x,
 		  y: coords.y,
-		  side: mySide(),
-		  x: coords.x,
-		  y: coords.y,
-          /*move: {
-            xy: coords,
-            side: mySide()
-		} */
+		  side: mySide()
         }
       ));
     };

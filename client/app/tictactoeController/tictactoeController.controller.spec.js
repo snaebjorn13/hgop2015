@@ -6,6 +6,16 @@ describe('Controller: TictactoeControllerCtrl', function () {
 
   var TictactoeControllerCtrl, scope, httpBackend, http, location, interval;
 
+  beforeEach(function () {
+	 module(function ($provide) {
+		var guids = ['332211', '112233'];
+
+		$provide.value('guid', function () {
+			return guids.pop();
+		})
+	 });
+  });
+
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($injector, $controller, $rootScope, $http, $location, $interval) {
     http = $http;
@@ -65,10 +75,10 @@ describe('Controller: TictactoeControllerCtrl', function () {
     httpBackend.flush();
   }
 
-  /* it('should post side from current user X', function () {
+  it('should post side from current user X', function () {
     getHistory();
     httpBackend.expectPOST('/api/makeMove/', {
-	  id: '*',
+	  id: '112233',
       gameId: '87687',
       comm: 'MakeMove',
       userName: 'Gummi',
@@ -78,10 +88,8 @@ describe('Controller: TictactoeControllerCtrl', function () {
 	  side: 'X'
     }).respond([
       {
-        event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        event: 'MoveMade',
+        userName: 'Gummi',
         timeStamp: '2014-12-02T11:29:29',
 		x: 2,
 		y: 0,
@@ -108,7 +116,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
 
     getHistory();
     httpBackend.expectPOST('/api/makeMove/', {
-	  id: '*',
+	  id: '112233',
       gameId: '87687',
       comm: 'MakeMove',
       userName: 'Gummi',
@@ -118,10 +126,8 @@ describe('Controller: TictactoeControllerCtrl', function () {
 	  side: 'O'
     }).respond([
       {
-        event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        event: 'MoveMade',
+        userName: 'Gummi',
         timeStamp: '2014-12-02T11:29:29',
 		x: 2,
 		y: 1,
@@ -142,7 +148,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
 
     expect(scope.myTurn()).toBe(false);
 
-}); */
+});
 
   it('should refresh history once every one second', function () {
     getHistory();
