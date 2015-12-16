@@ -39,3 +39,34 @@ Deployment skriptan keyrir á öðru stage-i heldur en það sem er trigger-að 
 
 #### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
 Við hvert commit sem push-að er fer build pipeline-ið í gang. Commit hash-ið er notað til að skilgreina útgáfuna og er bætt við fyrir aftan nafnið á docker image-inu. Þetta commit hash er pikkað upp af commit stage-inu og er sent áfram í acceptance stage-ið og deployment stage-ið. Því veltur það hvaða version fer í production, á því hvaða version (commit hash) commit stage-ið byrjar með. Því getum við sett gamalt build í gang (með eldra commit hash en það nýjasta) og þar með sett þá útgáfu í production, ef build-ið klikkar ekki á einhverju stigi.
+
+# Jenkins Build Pipeline
+## Commit Stage
+```
+export DISPLAY=:0
+npm install
+bower install
+./dockerbuild.sh
+```
+
+## Acceptance Stage
+```
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+./dockerupdate.sh vagrant@192.168.33.10 9000 $GIT_UPSTREAM_HASH
+```
+```
+npm install
+./acceptancetest.sh
+```
+
+## Capacity Stage
+```
+npm install
+./loadtest.sh
+```
+
+## Production Deployment Stage
+```
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+./dockerupdate.sh vagrant@192.168.33.10 9001 $GIT_UPSTREAM_HASH
+```
